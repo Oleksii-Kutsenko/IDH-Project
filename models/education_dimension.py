@@ -5,7 +5,7 @@ from .base import Base
 
 class EducationDimension(Base):
     __tablename__ = "education_dimension"
-    education_dimension_id = Column(Integer, primary_key=True)
+    education_id = Column(Integer, primary_key=True)
     math_score = Column(Float, nullable=False)
     science_score = Column(Float, nullable=False)
     reading_score = Column(Float, nullable=False)
