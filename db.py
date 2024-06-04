@@ -6,6 +6,11 @@ from models.base import Base
 
 # all models should be imported in order to be created with `Base.metadata.create_all(engine)` statement
 from models.country_dimension import CountryDimension  # pylint: disable=unused-import
+from models.country_statistics import CountryStatistics  # pylint: disable=unused-import
+from models.education_dimension import (
+    EducationDimension,  # pylint: disable=unused-import
+)
+from models.time_dimension import TimeDimension  # pylint: disable=unused-import
 
 engine = create_engine(DATABASE_URI)
 
