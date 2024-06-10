@@ -1,8 +1,6 @@
 import json
 from typing import Dict, List
 
-import requests
-
 from db import Session
 from models.country_dimension import CountryDimension
 

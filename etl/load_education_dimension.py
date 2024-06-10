@@ -2,7 +2,7 @@ from enum import Enum
 
 from openpyxl import load_workbook
 
-from countries_mapper import (
+from country_name_solver import (
     CountryNameSolver,
     territories_regions_unrecognized_countries,
 )
@@ -36,6 +36,7 @@ def load_education_dimension():
 
     # Data has been divided into three worksheets: Math, Science, and Reading
     # So we need to link data by year and country
+
     education_dimension_dict = {}
     for worksheet_name, report_type in zip(excel.sheetnames, list(ReportType)):
         worksheet = excel[worksheet_name]
