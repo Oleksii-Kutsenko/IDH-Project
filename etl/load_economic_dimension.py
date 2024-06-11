@@ -4,7 +4,6 @@ import pandas as pd
 
 from country_name_solver import CountryNameSolver
 from db import Session
-from models.country_dimension import CountryDimension
 from models.country_statistics import CountryStatistics
 from models.economic_dimension import EconomicDimension
 from models.time_dimension import TimeDimension
@@ -60,11 +59,15 @@ def load_economic_dimension():
                     time_id=time_id,
                 )
 
-            country_gdp = row["value"]
-            if country_gdp == "no data":
-                country_gdp = 0
-            economic_dimension = EconomicDimension(country_gdp=country_gdp)
-            country_statistics.economic_dimension = economic_dimension
+        country_gdp = row["value"]
+        if country_gdp == "no data":
+            country_gdp = 0
+        economic_dimension = EconomicDimension(country_gdp=country_gdp)
+
+        with Session() as session:
+            session.add(economic_dimension)
+            session.flush()
+            country_statistics.economic_id = economic_dimension.economic_id
             session.add(economic_dimension)
             session.add(country_statistics)
             session.commit()

@@ -106,6 +106,7 @@ class CountryNameSolver:
         "malaysia (2015)": "Malaysia",
         "moldova": "Moldova, Republic of",
         "ukraine (18 of 27 regions)": "Ukraine",
+        "vietnam": "Viet Nam",
     }
 
     def __init__(self) -> None:

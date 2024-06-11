@@ -15,6 +15,7 @@ from models.education_dimension import (
     EducationDimension,  # pylint: disable=unused-import
 )
 from models.time_dimension import TimeDimension  # pylint: disable=unused-import
+from models.military_dimension import MilitaryDimension  # pylint: disable=unused-import
 from models.trade_dimension import TradeDimension  # pylint: disable=unused-import
 
 engine = create_engine(DATABASE_URI)
