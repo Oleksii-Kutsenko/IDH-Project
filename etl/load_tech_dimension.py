@@ -13,65 +13,14 @@ def load_tech_dimension():
 
     country_name_solver = CountryNameSolver()
     file = "etl/data/rnd_spending.xlsx"
+    column_names = ["Country"] + list(range(1981, 2023))
 
-    column_names = [
-        "Country",
-        1981,
-        1982,
-        1983,
-        1984,
-        1985,
-        1986,
-        1987,
-        1988,
-        1989,
-        1990,
-        1991,
-        1992,
-        1993,
-        1994,
-        1995,
-        1996,
-        1997,
-        1998,
-        1999,
-        2000,
-        2001,
-        2002,
-        2003,
-        2004,
-        2005,
-        2006,
-        2007,
-        2008,
-        2009,
-        2010,
-        2011,
-        2012,
-        2013,
-        2014,
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-    ]
     sheet = pd.read_excel(file, sheet_name="Sheet1", header=0, names=column_names)
-
     sheet = pd.melt(sheet, id_vars=["Country"], var_name="year", value_name="value")
-
+    
     dictyears = {
-        2016: "etl/data/2016tables-country.xlsx",
-        2017: "etl/data/2017tables-country.xlsx",
-        2018: "etl/data/2018tables-country.xlsx",
-        2019: "etl/data/2019tables-country.xlsx",
-        2020: "etl/data/2020tables-country.xlsx",
-        2021: "etl/data/2021tables-country.xlsx",
-        2022: "etl/data/2022tables-country.xlsx",
-        2023: "etl/data/2023tables-country.xlsx",
+        year: f"etl/data/{year}-tables-country.xlsx"
+        for year in range(2016, 2024)
     }
 
     data_years = set(sheet["year"].unique()).union(set(dictyears.keys()))
@@ -84,14 +33,13 @@ def load_tech_dimension():
 
         session.commit()
 
-    for year in dictyears:
-        if year == 2016 or year == 2023:
-            sheet_nature = pd.read_excel(year, sheet_name=str(year) + "-tables-country", header=0)
-            sheet_nature = sheet_nature.drop(sheet_nature.columns[0], axis=1)
-        else:
-            sheet_nature = pd.read_excel(year, sheet_name=year + "-tables-country", header=0)
-            columnsToDrop = [0,2,5]
-            sheet_nature = sheet_nature.drop(sheet_nature.columns[columnsToDrop], axis=1)
+    sheet_nature_dict = {}
+    for year, file_path in dictyears.items():
+        sheet_nature = pd.read_excel(file_path, sheet_name=f"{year}-tables-country", header=0)
+        columns_to_drop = [0, 2, 5] if year not in {2016, 2023} else [0]
+        sheet_nature = sheet_nature.drop(sheet_nature.columns[columns_to_drop], axis=1)
+        sheet_nature_dict[year] = sheet_nature
+
         
     with Session() as session:
 
