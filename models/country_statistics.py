@@ -10,7 +10,7 @@ class CountryStatistics(Base):
     country_id = Column(Integer, ForeignKey("country_dimension.country_id"), nullable=False)
     time_id = Column(Integer, ForeignKey("time_dimension.time_id"), nullable=False)
     education_id = Column(Integer, ForeignKey("education_dimension.education_id"))
-    # technology_id = Column(Integer, ForeignKey("tech_dimension.tech_id"))
+    technology_id = Column(Integer, ForeignKey("tech_dimension.tech_id"))
     military_id = Column(Integer, ForeignKey("military_dimension.military_id"))
     competitiveness_id = Column(Integer, ForeignKey("competitiveness_dimension.competitiveness_id"))
     trade_id = Column(Integer, ForeignKey("trade_dimension.trade_id"))
