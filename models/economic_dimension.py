@@ -7,3 +7,4 @@ class EconomicDimension(Base):
     __tablename__ = "economic_dimension"
     economic_id = Column(Integer, primary_key=True)
     country_gdp = Column(Float, nullable=False)
+    normalized_score = Column(Float, nullable=True)

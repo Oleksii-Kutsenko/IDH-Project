@@ -8,3 +8,4 @@ class TradeDimension(Base):
 
     trade_id = Column(Integer, primary_key=True)
     total_trade = Column(Float)
+    normalized_score = Column(Float, nullable=True)
