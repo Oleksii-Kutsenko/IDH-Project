@@ -1,7 +1,10 @@
+version: '3'
+
 services:
-  db:
-    image: postgres:16.3
-    ports:
-      - 5432:5432
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: mssql
     env_file:
       - .db_env
+    ports:
+      - "1433:1433"

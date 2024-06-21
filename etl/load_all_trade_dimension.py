@@ -59,16 +59,15 @@ def load_all_trade_data():
                     time_id=time_id,
                 )
 
-            competitiveness_dim_object = CompetitivenessDimension(
-                export_value=row["Export Value"],
-            )
+            export_value = row["Export Value"] if not pd.isna(row["Export Value"]) else 0
+            import_value = row["Import Value"] if not pd.isna(row["Import Value"]) else 0
+
+            competitiveness_dim_object = CompetitivenessDimension(export_value=export_value)
             session.add(competitiveness_dim_object)
             session.flush()
             country_statistics.competitiveness_id = competitiveness_dim_object.competitiveness_id
 
-            trade_dim_object = TradeDimension(
-                total_trade=row["Export Value"] + row["Import Value"],
-            )
+            trade_dim_object = TradeDimension(total_trade=export_value + import_value)
             session.add(trade_dim_object)
             session.flush()
             country_statistics.trade_id = trade_dim_object.trade_id

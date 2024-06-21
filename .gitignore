@@ -1,3 +1,4 @@
 .db_env
 __pycache__
 .vscode
+data_cube
