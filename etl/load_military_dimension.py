@@ -12,7 +12,6 @@ from models.time_dimension import TimeDimension
 
 def load_military_dimension():
     country_name_solver = CountryNameSolver()
-    # Y:\etl\data\military_expeditures.xlsx
     file = Path("etl/data/military_expeditures.xlsx").resolve()
 
     sheet = pd.read_excel(file, sheet_name="Constant (2022) US$", header=5)
