@@ -1,6 +1,11 @@
 import os
 
-from dotenv import load_dotenv
+if True:
+    DATABASE_URI = (
+        "mssql+pyodbc://s31841:pQ-7_3Zs@db-mssql/s31841?" "driver=SQL+Server+Native+Client+11.0&Trusted_Connection=yes"
+    )
+else:
+    import dotenv
 
-load_dotenv(".db_env")
-DATABASE_URI = f"postgresql://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PASSWORD')}@{os.getenv('POSTGRES_HOST')}:{os.getenv('POSTGRES_PORT')}/{os.getenv('POSTGRES_DB')}"
+    dotenv.load_dotenv(".db_env")
+    DATABASE_URI = f"mssql+pyodbc://{os.getenv('MSSQL_USER')}:{os.getenv('MSSQL_PASSWORD')}@{os.getenv('MSSQL_HOST')}/{os.getenv('MSSQL_DB')}?driver=ODBC+Driver+17+for+SQL+Server"
